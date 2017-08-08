@@ -1,0 +1,49 @@
+.index {
+    // h1 {
+    //     font-size: dpr(34px);
+    //     line-height: rem(160px);
+    //     color: $red;
+    //     opacity: 0.9;
+    //     @include line-gradient(100%, rem(160px));
+    // }
+    // p {
+    //     height: rem(160px);
+    //     background: url('../../../assets/images/favicon.ico') no-repeat;
+
+    // }
+    // img {
+    //     height: rem(100px);
+    // }
+    width: 100%;
+    // height: 100%;
+    canvas {
+        // width: 100%;
+        // height: rem(900px);
+        // border: 1px solid red;
+
+    }
+    .orientation {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: rem(20px);
+        background: rgba(0, 0, 0, 0.6);
+
+        p {
+            color: #fff;
+            line-height: rem(40px);
+        }
+    }
+    .info {
+        position: absolute;
+        bottom: rem(200px);
+        left: 0;
+        width: 100%;
+        color: #363f5d;
+        background-color: #f9e9e9;
+        line-height: rem(100px);
+        font-size: dpr(40px);
+        text-align: center;
+    }
+}
