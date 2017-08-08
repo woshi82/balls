@@ -260,7 +260,7 @@ export default {
             //     min: { x: 0, y: 0 },
             //     max: { x: W, y: maxH }
             // });
-            // World.add(engineWorld, mouseConstraint);
+            World.add(engineWorld, mouseConstraint);
 
             // keep the mouse in sync with rendering
             render.mouse = mouse;
