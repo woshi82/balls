@@ -114,6 +114,7 @@ export default {
                 Composites = Matter.Composites,
                 Mouse = Matter.Mouse,
                 MouseConstraint = Matter.MouseConstraint,
+                Events = Matter.Events,
                 Bodies = Matter.Bodies;
 
             // create an engine
@@ -186,7 +187,6 @@ export default {
                     x = r + (Math.random() * 5 + 5);
                 }
                 y = r + iRow * 2 * r;
-                console.log(y)
                 aCircle.push(
                     Bodies.circle(x, y, r, {
                         // density: 0.0005, // 密度
@@ -208,37 +208,40 @@ export default {
                 );
             }
             World.add(engineWorld, aCircle);
-
-            var stack = Composites.stack(10, 10, 8, 1.5, 10, 10, function(x, y) {
-                if(Math.round(Math.random())){
-                    iG = iG >= 9 ? 0 : ++iG;
-                    texture = aGImgs[iG];
-                } else {
-                    iB = iB >= 9 ? 0 : ++iB;
-                    texture = aBImgs[iB];
-
-                }
-                // console.log(i, aImgs[i])
-                const b =  Bodies.circle(x, y, 20, {
-                    // density: 0.0005, // 密度
-                    // frictionAir: 0.06, // 空气摩擦力
-                    restitution: 0.4, // 恢复
-                    friction: 0.01, // 摩擦力
-                    // chamfer: {
-                    //     radius: 20
-                    // },
-                    render: {
-                        // fillStyle: '#000',
-                        sprite: {
-                            texture: texture,
-                            xScale: 0.308, // 缩放位图
-                            yScale: 0.308,
-                        }
-                    }
-                });
-
-                return b;
+            Events.on(aCircle, 'mousedown', function(event) {
+                var mousePosition = event.mouse.position;
+                console.log('mousedown at ' + mousePosition.x + ' ' + mousePosition.y);
             });
+            // var stack = Composites.stack(10, 10, 8, 1.5, 10, 10, function(x, y) {
+            //     if(Math.round(Math.random())){
+            //         iG = iG >= 9 ? 0 : ++iG;
+            //         texture = aGImgs[iG];
+            //     } else {
+            //         iB = iB >= 9 ? 0 : ++iB;
+            //         texture = aBImgs[iB];
+
+            //     }
+            //     // console.log(i, aImgs[i])
+            //     const b =  Bodies.circle(x, y, 20, {
+            //         // density: 0.0005, // 密度
+            //         // frictionAir: 0.06, // 空气摩擦力
+            //         restitution: 0.4, // 恢复
+            //         friction: 0.01, // 摩擦力
+            //         // chamfer: {
+            //         //     radius: 20
+            //         // },
+            //         render: {
+            //             // fillStyle: '#000',
+            //             sprite: {
+            //                 texture: texture,
+            //                 xScale: 0.308, // 缩放位图
+            //                 yScale: 0.308,
+            //             }
+            //         }
+            //     });
+
+            //     return b;
+            // });
             // World.add(engineWorld, stack);
 
 
@@ -255,11 +258,10 @@ export default {
                         }
                     }
                 });
-            // fit the render viewport to the scene
-            // Render.lookAt(render, {
-            //     min: { x: 0, y: 0 },
-            //     max: { x: W, y: maxH }
-            // });
+
+            Events.on(mouseConstraint, 'startdrag', function(event) {
+                console.log('startdrag', event);
+            });
             World.add(engineWorld, mouseConstraint);
 
             // keep the mouse in sync with rendering
@@ -604,7 +606,6 @@ export default {
                     v.x = 0;
                     btn.x = false;
                 };
-                console.log(sprite.x, sprite.y)
                 !btn.x && !btn.y && clearInterval(timer);
                 // 假设此时的受力
                 // if(v.y > 100){
